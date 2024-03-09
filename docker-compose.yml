@@ -10,13 +10,5 @@ services:
       - "44444:44444"
     env_file:
       - dev.env
-    networks:
-      - default
-
-networks:
-  default:
-    external: true
-    name: existing-network
-
 
 
