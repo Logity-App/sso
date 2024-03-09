@@ -1,7 +1,5 @@
 github.com/BurntSushi/toml v1.2.1 h1:9F2/+DoOYIOksmaJFPw1tGFy1eDnIJXg+UHjuD8lTak=
 github.com/BurntSushi/toml v1.2.1/go.mod h1:CxXYINrC8qIiEnFrOxCa7Jy5BFHlXnUU2pbicEuybxQ=
-github.com/Logity-App/contracts v0.0.0-20240307063346-9bfe3746760b h1:8XYm7be+F1mPLG9bhyrNQKNO0350rtQkgGg4/0X/6NM=
-github.com/Logity-App/contracts v0.0.0-20240307063346-9bfe3746760b/go.mod h1:DBvB1osQhpt3bBD7AZZOVYYGftataJghrF/siNJ6Vhc=
 github.com/Logity-App/contracts v0.0.0-20240307064028-298fea533c9c h1:UJ9FmtrGnJcnad67vQa+HmDbQZVizWeWH4iFuGGBtTg=
 github.com/Logity-App/contracts v0.0.0-20240307064028-298fea533c9c/go.mod h1:DBvB1osQhpt3bBD7AZZOVYYGftataJghrF/siNJ6Vhc=
 github.com/golang/protobuf v1.5.0/go.mod h1:FsONVRAS9T7sI+LIUmWTfcYkHO4aIWwzhcaSAoJOfIk=
