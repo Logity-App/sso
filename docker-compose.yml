@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  sso:
+    container_name: sso
+    build:
+      context: .
+      dockerfile: build/app/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "44044:44044"
+    env_file:
+      - dev.env
+    networks:
+      - default
+
+networks:
+  default:
+    external: true
+    name: existing-network
+
+
+
