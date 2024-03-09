@@ -8,7 +8,7 @@ services:
       dockerfile: build/app/Dockerfile
     restart: unless-stopped
     ports:
-      - "44044:44044"
+      - "44444:44444"
     env_file:
       - dev.env
     networks:
