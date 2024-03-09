@@ -5,7 +5,6 @@ services:
     container_name: sso
     build:
       context: .
-      dockerfile: build/app/Dockerfile
     restart: unless-stopped
     ports:
       - "44444:44444"
