@@ -53,5 +53,6 @@ jobs:
               for s in $(echo $VARS_CONTEXT | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" ); do
                 export $s
               done
+              cd ${{vars.APP_NAME}}
               git pull
               bash .github/deploy/deploy.sh
