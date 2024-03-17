@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/Logity-App/sso/internal/app"
-	config "github.com/Logity-App/sso/internal/pkg/congig"
+	config "github.com/Logity-App/sso/internal/pkg/config"
 	"github.com/Logity-App/sso/internal/pkg/logger"
 	"log/slog"
 	"os"
@@ -21,7 +21,7 @@ func main() {
 
 	log.Info("str", slog.String("env", cfg.App.Env))
 
-	application := app.New(log, cfg.GRPC.Port, cfg.App.StoragePath, cfg.App.TokenTTL)
+	application := app.New(log, cfg)
 
 	go func() {
 		application.GRPCSrv.MustRun()

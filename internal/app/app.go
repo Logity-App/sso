@@ -2,9 +2,13 @@ package app
 
 import (
 	grpcapp "github.com/Logity-App/sso/internal/app/grpc"
+	"github.com/Logity-App/sso/internal/pkg/config"
+	"github.com/Logity-App/sso/internal/services/auth"
+	"github.com/Logity-App/sso/internal/storage/postgres"
+
+	"os"
 
 	"log/slog"
-	"time"
 )
 
 type App struct {
@@ -13,11 +17,18 @@ type App struct {
 
 func New(
 	log *slog.Logger,
-	grpcPort int,
-	storagePath string,
-	tokenTTL time.Duration,
+	cfg *config.Config,
 ) *App {
-	grpcApp := grpcapp.New(log, grpcPort)
+	dbClient, err := postgres.New(&cfg.Database)
+
+	if err != nil {
+		log.Error("error init client db: %s", err)
+		os.Exit(0) // TODO
+	}
+
+	authService := auth.New(log, dbClient, cfg.App.TokenTTL)
+
+	grpcApp := grpcapp.New(log, cfg.GRPC.Port, authService)
 
 	return &App{
 		GRPCSrv: grpcApp,
