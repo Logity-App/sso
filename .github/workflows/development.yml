@@ -4,7 +4,7 @@ on: push
 
 jobs:
   push_to_registry:
-    name: publish to docker image
+    name: build
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
@@ -31,8 +31,8 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
   deploy_to_development:
+      name: deploy
       needs: push_to_registry
-      name: pull and run image
       runs-on: ubuntu-latest
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
