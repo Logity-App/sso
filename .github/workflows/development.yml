@@ -4,8 +4,7 @@ on: push
 
 jobs:
   push_to_registry:
-    name: Push Docker image to Docker Hub
-    environment: Logity
+    name: publish to docker image
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
@@ -34,7 +33,6 @@ jobs:
   deploy_to_development:
       needs: push_to_registry
       name: pull and run image
-      environment: Logity
       runs-on: ubuntu-latest
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
@@ -47,6 +45,7 @@ jobs:
           with:
             host: ${{ secrets.HOST }}
             port: ${{ secrets.PORT }}
+            username: ${{ secrets.DEPLOY_SSH_USERNAME }}
             key: ${{ secrets.DEPLOY_SSH_KEY_PRIVATE }}
             envs: DOCKER_USERNAME, DOCKER_PASSWORD, DOCKER_REPOSITORY, DOCKER_TAG
             script_stop: true
