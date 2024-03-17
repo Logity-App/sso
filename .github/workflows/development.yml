@@ -45,8 +45,8 @@ jobs:
         - name: Connect and run script
           uses: appleboy/ssh-action@master
           with:
-            host: "185.41.162.51"
-            port: "22"
+            host: ${{ secrets.HOST }}
+            port: ${{ secrets.PORT }}
             key: ${{ secrets.DEPLOY_SSH_KEY_PRIVATE }}
             envs: DOCKER_USERNAME, DOCKER_PASSWORD, DOCKER_REPOSITORY, DOCKER_TAG
             script_stop: true
