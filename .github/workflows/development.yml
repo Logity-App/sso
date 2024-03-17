@@ -1,4 +1,4 @@
-name: Main
+name: Development
 
 on: push
 
@@ -30,3 +30,22 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+  deploy_to_development:
+      needs: push_to_registry
+      name: pull and run image
+      runs-on: ubuntu-latest
+      env:
+        DOCKER_USERNAME: ${{ .secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ .secrets.DOCKER_PASSWORD }}
+        DOCKER_REPOSITORY: ${{ .vars.DOCKER_REPOSITORY }}
+        DOCKER_TAG: main
+      steps:
+        - name: Connect and run script
+          uses: appleboy/ssh-action@master
+          with:
+            host: ${{ secrets.SERVER_HOST }}
+            port: ${{ secrets.SERVER_PORT }}
+            key: ${{ secrets.DEPLOY_SSH_KEY_PRIVATE }}
+            envs: DOCKER_USERNAME, DOCKER_PASSWORD, DOCKER_REPOSITORY, DOCKER_TAG
+            script_stop: true
+            script: bash deploy.sh
