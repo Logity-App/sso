@@ -3,7 +3,7 @@ version: "3.9"
 services:
   sso:
     container_name: sso
-    image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:latest
+    image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:main
     restart: unless-stopped
     environment:
       - ENV=${ENVIRONMENT}
