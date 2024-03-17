@@ -49,4 +49,7 @@ jobs:
             key: ${{ secrets.DEPLOY_SSH_KEY_PRIVATE }}
             envs: DOCKER_USERNAME, DOCKER_PASSWORD, DOCKER_REPOSITORY, DOCKER_TAG
             script_stop: true
-            script: ls -la
+            script: |
+              cd ${{vars.APP_NAME}}
+              git pull
+              bash .github/scripts/deploy.sh
