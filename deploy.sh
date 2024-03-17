@@ -1,3 +1,4 @@
+#!/bin/bash
 echo $DOCKER_USERNAME
 echo $DOCKER_PASSWORD
 echo $DOCKER_REPOSITORY

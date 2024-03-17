@@ -49,4 +49,4 @@ jobs:
             key: ${{ secrets.DEPLOY_SSH_KEY_PRIVATE }}
             envs: DOCKER_USERNAME, DOCKER_PASSWORD, DOCKER_REPOSITORY, DOCKER_TAG
             script_stop: true
-            script: bash ../scripts/deploy.sh
+            script: bash deploy.sh
