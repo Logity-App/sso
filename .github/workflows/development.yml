@@ -35,9 +35,9 @@ jobs:
       name: pull and run image
       runs-on: ubuntu-latest
       env:
-        DOCKER_USERNAME: ${{ .secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ .secrets.DOCKER_PASSWORD }}
-        DOCKER_REPOSITORY: ${{ .vars.DOCKER_REPOSITORY }}
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_REPOSITORY: ${{ vars.DOCKER_REPOSITORY }}
         DOCKER_TAG: main
       steps:
         - name: Connect and run script
