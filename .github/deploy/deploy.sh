@@ -5,4 +5,4 @@ CONTAINER_NAME=$DOCKER_REPOSITORY_$DOCKER_TAG
 docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 docker-compose -f .github/deploy/docker-compose.${ENVIRONMENT}.yml down --remove-orphans
 docker-compose -f .github/deploy/docker-compose.${ENVIRONMENT}.yml pull
-docker-compose -f .github/deploy/docker-compose.${ENVIRONMENT}.yml up sso -d
+docker-compose -f .github/deploy/docker-compose.${ENVIRONMENT}.yml up $APP_NAME -d
