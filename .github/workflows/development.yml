@@ -38,7 +38,6 @@ jobs:
       runs-on: ubuntu-latest
       env:
         VARS_CONTEXT: ${{ toJson(vars) }}
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       steps:
         - name: Connect and run script
@@ -48,7 +47,7 @@ jobs:
             port: ${{ secrets.SERVER_PORT }}
             username: ${{ secrets.DEPLOY_SSH_USERNAME }}
             key: ${{ secrets.DEPLOY_SSH_KEY_PRIVATE }}
-            envs: VARS_CONTEXT, DOCKER_USERNAME, DOCKER_PASSWORD
+            envs: VARS_CONTEXT, DOCKER_PASSWORD
             script_stop: true
             script: |
               for s in $(echo $VARS_CONTEXT | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" ); do
