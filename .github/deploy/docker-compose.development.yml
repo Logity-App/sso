@@ -3,11 +3,16 @@ version: "3.9"
 services:
   sso:
     container_name: sso
+    image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:latest
     restart: unless-stopped
-    env_file:
-      - .env
+    environment:
+      - ENV=${ENVIRONMENT}
+      - STORAGE_PATH=${STORAGE_PATH}
+      - TOKEN_TTL=${TOKEN_TTL}
+      - PORT=${SERVER_PORT}
+      - TIMEOUT=${TIMEOUT}
     ports:
-      - "${PORT}:${PORT}"
+      - "${SERVER_PORT}:${SERVER_PORT}"
     networks:
       - default
 
@@ -28,6 +33,3 @@ networks:
   default:
     external: true
     name: existing-network
-
-
-

@@ -35,10 +35,8 @@ jobs:
       needs: push_to_registry
       runs-on: ubuntu-latest
       env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        DOCKER_REPOSITORY: ${{ vars.DOCKER_REPOSITORY }}
-        DOCKER_TAG: main
+        VARS_CONTEXT: ${{ toJson(vars) }}
+        SECRETS_CONTEXT: ${{ toJson(secrets) }}
       steps:
         - name: Connect and run script
           uses: appleboy/ssh-action@master
@@ -47,9 +45,15 @@ jobs:
             port: ${{ secrets.SERVER_PORT }}
             username: ${{ secrets.DEPLOY_SSH_USERNAME }}
             key: ${{ secrets.DEPLOY_SSH_KEY_PRIVATE }}
-            envs: DOCKER_USERNAME, DOCKER_PASSWORD, DOCKER_REPOSITORY, DOCKER_TAG
+            envs: VARS_CONTEXT, SECRETS_CONTEXT
             script_stop: true
             script: |
-              cd ${{vars.APP_NAME}}
+              for s in $(echo $VARS_CONTEXT | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" ); do
+                export $s
+              done
+              for s in $(echo $SECRETS_CONTEXT | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" ); do
+                export $s
+              done
+              cd ${{ vars.APP_NAME }}
               git pull
-              bash .github/scripts/deploy.sh
+              bash .github/deploy/deploy.sh
