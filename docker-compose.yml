@@ -6,9 +6,30 @@ services:
     build:
       context: .
     restart: unless-stopped
-    ports:
-      - "44444:44444"
     env_file:
-      - dev.env
+      - .env
+    ports:
+      - "${PORT}:${PORT}"
+    networks:
+      - default
+
+#  postgres:
+#    container_name: postgres
+#    image: postgres:16-alpine
+#    volumes:
+#      - ./exports/postgres/data:/var/lib/postgresql/data
+#    restart: unless-stopped
+#    ports:
+#      - "6432:5432"
+#    environment:
+#      POSTGRES_DB: logity_auth
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: postgres
+
+networks:
+  default:
+    external: true
+    name: existing-network
+
 
 
