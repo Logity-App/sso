@@ -50,7 +50,10 @@ jobs:
             envs: VARS_CONTEXT, SECRETS_CONTEXT
             script_stop: true
             script: |
-              # Pipe the JSON string into jq
-              echo "$VARS_CONTEXT"
+              while read -rd $'' line
+              do
+                export "$line"
+              done < <(jq -r <<<$VARS_CONTEXT \
+                'to_entries|map("\(.key)=\(.value)\u0000")[]')
               git pull
               bash .github/deploy/deploy.sh
