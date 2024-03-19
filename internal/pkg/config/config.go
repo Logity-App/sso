@@ -14,7 +14,7 @@ type Config struct {
 
 type AppConfig struct {
 	Env      string        `env:"ENV" env-default:"local"`
-	TokenTTL time.Duration `env:"TOKEN_TTL" env-required:"1m"`
+	TokenTTL time.Duration `env:"TOKEN_TTL" env-required:"true"`
 }
 
 type GRPCCConfig struct {
