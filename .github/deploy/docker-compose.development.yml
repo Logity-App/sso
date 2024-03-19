@@ -5,6 +5,8 @@ services:
     container_name: sso
     image: ${DOCKER_USERNAME}/${DOCKER_REPOSITORY}:main
     restart: unless-stopped
+    env_file:
+      - .env
     environment:
       - ENV=${ENVIRONMENT}
       - STORAGE_PATH=${STORAGE_PATH}
