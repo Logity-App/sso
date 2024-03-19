@@ -50,11 +50,14 @@ jobs:
             envs: VARS_CONTEXT, DOCKER_PASSWORD
             script_stop: true
             script: |
+              for s in $(echo $VARS_CONTEXT | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" ); do
+                export $s
+              done
               echo Test ------  ${{vars.APP_NAME}}
-              cd ${{vars.APP_NAME}}
+              cd ${{vars.APP_NAME}}                       
+              git pull              
               cp ./config/development.env .github/deploy/.env
               for s in $(echo $VARS_CONTEXT | jq -r "to_entries|map(\"\(.key)=\(.value|tostring)\")|.[]" ); do
                 echo -e $s >> .github/deploy/.env
-              done            
-              git pull
+              done
               bash .github/deploy/deploy.sh
