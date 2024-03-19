@@ -56,6 +56,6 @@ jobs:
               echo Test ------  ${{vars.APP_NAME}}
               cd ${{vars.APP_NAME}}
               cp ./config/development.env .github/deploy/.env
-              echo "\nTEST=TEST" >> .github/deploy/.env
+              echo -e "\nTEST=TEST" >> .github/deploy/.env
               git pull
               bash .github/deploy/deploy.sh
