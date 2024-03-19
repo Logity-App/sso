@@ -14,11 +14,11 @@ type Config struct {
 
 type AppConfig struct {
 	Env      string        `env:"ENV" env-default:"local"`
-	TokenTTL time.Duration `env:"TOKEN_TTL" env-required:"true"`
+	TokenTTL time.Duration `env:"TOKEN_TTL" env-required:"1m"`
 }
 
 type GRPCCConfig struct {
-	Port    int           `env:"PORT" env-required:"true"`
+	Port    int           `env:"PORT" env-required:"44444"`
 	Timeout time.Duration `env:"TIMEOUT" env-default:"5s"`
 }
 

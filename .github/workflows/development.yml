@@ -54,5 +54,6 @@ jobs:
                 export $s
               done
               cd ${{vars.APP_NAME}}
+              cp ./config/ ${{ENVIRONMENT}}.env .env
               git pull
               bash .github/deploy/deploy.sh
