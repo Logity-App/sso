@@ -24,7 +24,7 @@ type GRPCCConfig struct {
 
 type Database struct {
 	Enable          bool   `env:"POSTGRES_ENABLE" env-default:"false"`
-	Dsn             string `env:"POSTGRES_DSN" env-required:"true" env-default:"postgres:5432"`
+	Dsn             string `env:"POSTGRES_DSN" env-default:"postgres:5432"`
 	MaxIdleConn     int    `env:"POSTGRES_MAX_IDLE_CONN" env-default:"3"`
 	MaxLifeTimeConn int    `env:"POSTGRES_LIFETIME_CONN" env-default:"3"`
 }
