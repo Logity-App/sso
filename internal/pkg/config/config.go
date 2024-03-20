@@ -13,7 +13,7 @@ type Config struct {
 }
 
 type AppConfig struct {
-	Env      string        `env:"ENV" env-default:"local"`
+	Env      string        `env:"ENVIRONMENT" env-default:"local"`
 	TokenTTL time.Duration `env:"TOKEN_TTL" env-required:"true"`
 }
 
