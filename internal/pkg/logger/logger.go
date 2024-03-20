@@ -7,7 +7,7 @@ import (
 
 const (
 	envLocal = "local"
-	envDev   = "dev"
+	envDev   = "development"
 	envProd  = "prod"
 )
 
