@@ -5,6 +5,7 @@ import (
 	"github.com/Logity-App/sso/internal/app"
 	config "github.com/Logity-App/sso/internal/pkg/config"
 	"github.com/Logity-App/sso/internal/pkg/logger"
+	"log/slog"
 	"os"
 	"os/signal"
 	"syscall"
@@ -21,7 +22,7 @@ func main() {
 
 	log := logger.SetupLogger(cfg.App.Env)
 
-	//log.Info("str", slog.String("env", cfg.App.Env))
+	log.Info("str", slog.String("env", cfg.App.Env))
 
 	application := app.New(log, cfg)
 

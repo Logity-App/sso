@@ -18,7 +18,7 @@ type AppConfig struct {
 }
 
 type GRPCCConfig struct {
-	Port    int           `env:"PORT" env-required:"true"`
+	Port    int           `env:"SERVER_PORT" env-required:"true"`
 	Timeout time.Duration `env:"TIMEOUT" env-default:"5s"`
 }
 

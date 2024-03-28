@@ -4,25 +4,42 @@ services:
   sso:
     container_name: sso
     restart: unless-stopped
+    build: .
     env_file:
       - .env
     ports:
-      - "${PORT}:${PORT}"
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    depends_on:
+      - postgres
+      - liquibase-postgres
     networks:
       - default
 
-#  postgres:
-#    container_name: postgres
-#    image: postgres:16-alpine
-#    volumes:
-#      - ./exports/postgres/data:/var/lib/postgresql/data
-#    restart: unless-stopped
-#    ports:
-#      - "6432:5432"
-#    environment:
-#      POSTGRES_DB: logity_auth
-#      POSTGRES_USER: postgres
-#      POSTGRES_PASSWORD: postgres
+  postgres:
+    container_name: postgres
+    image: postgres:14-alpine
+    volumes:
+      - ./exports/postgres/data:/var/lib/postgresql/data
+    restart: unless-stopped
+    ports:
+      - "6455:5432"
+    environment:
+      POSTGRES_DB: logity_auth
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  liquibase-postgres:
+    container_name: liquibase-postgres
+    image: liquibase/liquibase:4.15
+    depends_on:
+      - postgres
+    volumes:
+      - ./migrations/liquibase/postgres:/liquibase/changelog
+    command: [
+      "sh",
+      "-c",
+      "sleep 1 && liquibase update --url=\"jdbc:postgresql://postgres:5432/logity_auth?user=postgres&password=postgres&sslmode=disable\" --changelog-file=\"changelog/changelog.xml\""
+    ]
 
 networks:
   default:

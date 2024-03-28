@@ -26,7 +26,7 @@ func New(
 		os.Exit(0) // TODO
 	}
 
-	authService := auth.New(log, dbClient, cfg.App.TokenTTL)
+	authService := auth.New(log, dbClient, dbClient, cfg.App.TokenTTL)
 
 	grpcApp := grpcapp.New(log, cfg.GRPC.Port, authService)
 
