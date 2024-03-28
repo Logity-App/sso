@@ -25,6 +25,20 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
 
+  liquibase-postgres:
+    container_name: liquibase-postgres
+    image: liquibase/liquibase:4.15
+    depends_on:
+      - postgres
+    volumes:
+      - ./migrations/liquibase/postgres:/liquibase/changelog
+    command: [
+      "sh",
+      "-c",
+      "sleep 1 && liquibase update --url=\"jdbc:postgresql://postgres:5432/logity_auth?user=postgres&password=postgres&sslmode=disable\" --changelog-file=\"changelog/changelog.xml\""
+    ]
+
+
 networks:
   default:
     external: true
