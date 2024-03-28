@@ -7,29 +7,23 @@ services:
     restart: unless-stopped
     env_file:
       - .env
-    environment:
-      - ENV=${ENVIRONMENT}
-      - STORAGE_PATH=${STORAGE_PATH}
-      - TOKEN_TTL=${TOKEN_TTL}
-      - PORT=${SERVER_PORT}
-      - TIMEOUT=${TIMEOUT}
     ports:
       - "${SERVER_PORT}:${SERVER_PORT}"
     networks:
       - default
 
-#  postgres:
-#    container_name: postgres
-#    image: postgres:16-alpine
-#    volumes:
-#      - ./exports/postgres/data:/var/lib/postgresql/data
-#    restart: unless-stopped
-#    ports:
-#      - "6432:5432"
-#    environment:
-#      POSTGRES_DB: logity_auth
-#      POSTGRES_USER: postgres
-#      POSTGRES_PASSWORD: postgres
+  postgres:
+    container_name: postgres
+    image: postgres:16-alpine
+    volumes:
+      - ./exports/postgres/data:/var/lib/postgresql/data
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: logity_auth
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
 
 networks:
   default:
